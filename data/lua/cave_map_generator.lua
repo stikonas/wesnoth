@@ -29,9 +29,9 @@ function callbacks.generate_map(params)
 		end
 		local r = random(1000)
 		if r <= params.village_density then
-			map:set_tile(x, y, params.terrain_village)
+			map:set_tile(x, y, helper.rand(params.terrain_village))
 		else
-			map:set_tile(x, y, params.terrain_clear)
+			map:set_tile(x, y, helper.rand(params.terrain_clear))
 		end
 	end
 
