@@ -107,7 +107,6 @@ commandline_options::commandline_options (const std::vector<std::string>& args) 
 	nomusic(false),
 	nosound(false),
 	new_widgets(false),
-	path(false),
 	preprocess(false),
 	preprocess_defines(),
 	preprocess_input_macros(),
@@ -152,8 +151,6 @@ commandline_options::commandline_options (const std::vector<std::string>& args) 
 		("bunzip2", po::value<std::string>(), "decompresses a file (<arg>.bz2) in bzip2 format and stores it without the .bz2 suffix. <arg>.bz2 will be removed.")
 		("bzip2", po::value<std::string>(), "compresses a file (<arg>) in bzip2 format, stores it as <arg>.bz2 and removes <arg>.")
 		("clock", "Adds the option to show a clock for testing the drawing timer.")
-		("config-dir", po::value<std::string>(), "sets the path of the userdata directory to $HOME/<arg> or My Documents\\My Games\\<arg> for Windows. You can specify also an absolute path outside the $HOME or My Documents\\My Games directory. DEPRECATED: use userdata-path and userconfig-path instead.")
-		("config-path", "prints the path of the userdata directory and exits. DEPRECATED: use userdata-path and userconfig-path instead.")
 		("core", po::value<std::string>(), "overrides the loaded core with the one whose id is specified.")
 		("data-dir", po::value<std::string>(), "overrides the data directory with the one specified.")
 		("data-path", "prints the path of the data directory and exits.")
@@ -175,7 +172,6 @@ commandline_options::commandline_options (const std::vector<std::string>& args) 
 		("nomusic", "runs the game without music.")
 		("nosound", "runs the game without sounds and music.")
 		("password", po::value<std::string>(), "uses <password> when connecting to a server, ignoring other preferences.")
-		("path", "prints the path to the data directory and exits.")
 		("plugin", po::value<std::string>(), "(experimental) load a script which defines a wesnoth plugin. similar to --script below, but lua file should return a function which will be run as a coroutine and periodically woken up with updates.")
 		("render-image", po::value<two_strings>()->multitoken(), "takes two arguments: <image> <output>. Like screenshot, but instead of a map, takes a valid wesnoth 'image path string' with image path functions, and writes it to a .png file."
 #ifdef _WIN32
@@ -320,10 +316,6 @@ commandline_options::commandline_options (const std::vector<std::string>& args) 
 		clock = true;
 	if (vm.count("core"))
 		core_id = vm["core"].as<std::string>();
-	if (vm.count("config-dir"))
-		userdata_dir = vm["config-dir"].as<std::string>(); //TODO: complain and remove
-	if (vm.count("config-path"))
-		userdata_path = true; //TODO: complain and remove
 	if (vm.count("controller"))
 		multiplayer_controller = parse_to_uint_string_tuples_(vm["controller"].as<std::vector<std::string>>());
 	if (vm.count("data-dir"))
@@ -408,8 +400,6 @@ commandline_options::commandline_options (const std::vector<std::string>& args) 
 		nogui = true;
 	if (vm.count("parm"))
 		multiplayer_parm = parse_to_uint_string_string_tuples_(vm["parm"].as<std::vector<std::string>>());
-	if (vm.count("path"))
-		path = true;
 	if (vm.count("preprocess"))
 	{
 		preprocess = true;
