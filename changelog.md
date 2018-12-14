@@ -24,6 +24,8 @@
    * Add --campaign-skip-story command line switch for skipping directly to turn 1. (issue #3472)
    * Fix documentation of --render-image command line switch. (issue #3568)
    * Update manpage with options previously only documented by wesnoth --help.
+   * Removed old command line switches which have been superseeded by
+     --data-path, --userdata-path and --userdata-dir. (issue #3775)
    * Fix wrong ordering for BW / BF years, for example in Play a Campaign when sorted by date. (issue #3187)
    * GUI.pyw can now terminate a running maintenance script
  ### Multiplayer server
